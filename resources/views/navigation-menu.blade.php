@@ -17,14 +17,57 @@
                         :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('usuarios.index') }}"
-                        :active="request()->routeIs('usuarios.index')">
-                        {{ __('Usuarios') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('plans.index') }}"
-                        :active="request()->routeIs('plans.index')">
-                        {{ __('Planes') }}
-                    </x-nav-link>
+
+                    @if (Auth::user()->email == 'admin@admin.com')
+                        <x-nav-link href="{{ route('clients.index') }}"
+                            :active="request()->routeIs('clients.index')">
+                            {{ __('Clientes') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('plans.index') }}"
+                            :active="request()->routeIs('plans.index')">
+                            {{ __('Planes') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('rutinas.index') }}"
+                            :active="request()->routeIs('rutinas.index')">
+                            {{ __('Rutinas') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('saluds.index') }}"
+                            :active="request()->routeIs('saluds.index')">
+                            {{ __('Estados de Salud') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('entrenadores.index') }}"
+                            :active="request()->routeIs('entrenadores.index')">
+                            {{ __('Entrenadores') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('cursos.index') }}"
+                            :active="request()->routeIs('cursos.index')">
+                            {{ __('Cursos') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('auditorias.index') }}"
+                            :active="request()->routeIs('auditorias.index')">
+                            {{ __('Auditoria') }}
+                        </x-nav-link>
+                    @endif
+                    @if (Auth::user()->entrenador)
+                        <x-nav-link href="{{ route('clients.index') }}"
+                            :active="request()->routeIs('clients.index')">
+                            {{ __('Clientes') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="{{ route('rutinas.index') }}"
+                            :active="request()->routeIs('rutinas.index')">
+                            {{ __('Rutinas') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('saluds.index') }}"
+                            :active="request()->routeIs('saluds.index')">
+                            {{ __('Estados de Salud') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="{{ route('cursos.index') }}"
+                            :active="request()->routeIs('cursos.index')">
+                            {{ __('Cursos') }}
+                        </x-nav-link>
+                    @endif
 
                 </div>
             </div>
@@ -127,11 +170,11 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('Administrar Cuenta') }}
                             </div>
 
                             <x-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -150,7 +193,7 @@
 
                                 <x-dropdown-link href="{{ route('logout') }}"
                                     @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Cerrar Sesión') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>

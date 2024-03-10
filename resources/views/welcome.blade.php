@@ -99,10 +99,21 @@
                                 center that focuses on pushing you to your absolute limit.
                                 Download our complete brochure to get started today!
                             </p>
-                            <a href="{{ route('register') }}"
-                                class="bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white p-4 border border-orange-500 hover:border-transparent rounded inline-block mt-5 cursor-pointer">
-                                Registrarse
-                            </a>
+                            <div class="flex space-x-5 justify-center w-60">
+                                <a href="{{ route('login') }}"
+                                    class="bg-transparent hover:bg-orange-500 text-orange-500
+                                     font-semibold hover:text-white p-4 border border-orange-500
+                                      hover:border-transparent rounded inline-block mt-5 cursor-pointer">
+                                    Ingresar
+                                </a>
+                                <a href="{{ route('clients.create') }}"
+                                    class="bg-transparent hover:bg-orange-500 text-orange-500
+                                     font-semibold hover:text-white p-4 border border-orange-500
+                                      hover:border-transparent rounded inline-block mt-5 cursor-pointer">
+                                    Registrarse
+                                </a>
+
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,7 @@
                     <form action="{{ route('plans.store') }}"
                         method="POST">
                         @csrf
+                        <input type="hidden" name="pagado" value="0">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-rows-2 gap-6">

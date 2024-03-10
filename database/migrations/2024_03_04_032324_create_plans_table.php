@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("descripcion");
             $table->integer("validez");
             $table->float("precio");
-
             $table->timestamps();
         });
     }

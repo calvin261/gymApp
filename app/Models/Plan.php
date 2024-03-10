@@ -13,5 +13,11 @@ class Plan extends Model
         'descripcion',
         'validez',
         'precio',
+        'pagado'
     ];
+    public function clients()
+    {
+        return $this->hasMany(Client::class,'plan_id');
+    }
+
 }

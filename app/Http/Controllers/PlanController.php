@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
 {
@@ -35,9 +36,15 @@ class PlanController extends Controller
             'descripcion' => 'required',
             'validez' => 'required|numeric',
             'precio' => 'required|numeric',
+            'pagado' => 'required'
         ]);
 
         Plan::create($request->all());
+        registrarAccionAuditoria(Auth::user(), 'Creación de Plan', sprintf(
+            'El usuario %s ha creado el plan %s',
+            Auth::user()->name,
+            $request->nombre
+        ));
         return redirect()->route('plans.index');
     }
 
@@ -54,7 +61,8 @@ class PlanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $plan = Plan::find($id);
+        return view('admin.plans.edit', compact('plan'));
     }
 
     /**
@@ -62,7 +70,24 @@ class PlanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'validez' => 'numeric',
+            'precio' => 'numeric',
+        ]);
+        $plan = Plan::find($id);
+        $plan->update([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'validez' => $request->validez,
+            'precio' => $request->precio,
+            'pagado' => $request->pagado
+        ]);
+        registrarAccionAuditoria(Auth::user(), 'Actualización de Plan', sprintf(
+            'El usuario %s ha actualizado el plan %s',
+            Auth::user()->name,
+            $request->nombre
+        ));
+        return redirect()->route('plans.index');
     }
 
     /**
@@ -71,7 +96,15 @@ class PlanController extends Controller
     public function destroy(string $id)
     {
         $plan = Plan::find($id);
+        $nombrePlan = $plan->nombre;
         $plan->delete();
+
+        registrarAccionAuditoria(Auth::user(), 'Eliminación de Plan', sprintf(
+            'El usuario %s ha eliminado el plan %s',
+            Auth::user()->name,
+            $nombrePlan
+        ));
+
         return redirect()->route('plans.index');
     }
 }
