@@ -47,7 +47,21 @@ class Dashboard extends Component
             return view('admin.entrenadores.dashboard', ['entrenador' => $entrenador, 'cursos' => $cursos]);
         } else {
             $numberClients = Client::all()->count();
-            return view('admin.dashboard', compact('numberClients'));
+            $numberEntrenadores = Entrenadore::all()->count();
+            $numberCursos = Curso::all()->count();
+            $numeroPlanes = Plan::all()->count();
+            $planesPagados = Client::where('pagado', true)->count();
+            $precioTotal = Client::where('pagado', true)
+                ->join('plans', 'clients.plan_id', '=', 'plans.id')
+                ->sum('precio');
+            return view('admin.dashboard', compact(
+                'numberClients',
+                'numeroPlanes',
+                'precioTotal',
+                'planesPagados',
+                'numberEntrenadores',
+                'numberCursos'
+            ));
         }
     }
     public function udpateClientRutina(Client $client, $rutina_id = null)
@@ -94,8 +108,14 @@ class Dashboard extends Component
     {
 
         $plan = Plan::find($client->plan->id);
-        $plan->pagado = $pago;
-        $plan->save();
+        $client->pagado = true;
+        $client->save();
         $this->modalPagar = false;
+
+        registrarAccionAuditoria($client->user, 'Pago Plan', sprintf(
+            'El usuario %s ha pagado el plan a %s',
+            $client->user->name,
+            $plan ? $plan->Nombre : 'Sin plan'
+        ));
     }
 }

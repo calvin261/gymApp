@@ -8,6 +8,14 @@
         <a href="{{ route('entrenadores.create') }}">
             <x-button class="bg-green-400 mb-5 hover:bg-green-600">Crear una nuevo entrenadores</x-button>
         </a>
+        <div>
+            <label for="date_filter">Filtrar por fecha de ingreso:</label>
+            <select id="date_filter">
+                <option value="today">Hoy</option>
+                <option value="this_week">Esta semana</option>
+                <option value="this_month">Este mes</option>
+            </select>
+        </div>
         <x-table>
             @if ($entrenadores->count())
                 <table aria-describedby="usuarios"
@@ -101,7 +109,8 @@
         type="text/javascript"></script>
     <script>
         $(document).ready(function() {
-            new DataTable('#especialidad_table', {
+
+            const table = new DataTable('#especialidad_table', {
 
                 language: {
                     info: '_PAGE_ de _PAGES_',
@@ -110,6 +119,32 @@
                     lengthMenu: 'Mostrando _MENU_ registros',
                     search: "Buscar: ",
                     zeroRecords: 'No hay coincidencias'
+                }
+            });
+
+            $('#date_filter').on('change', function() {
+                const filterValue = $(this).val();
+                const today = new Date();
+                const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+                const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+                switch (filterValue) {
+                    case 'today':
+                        console.log(today);
+                        const todayFormatted = "2024-03-09"
+                        console.log(todayFormatted);
+                        // const todayFormatted = today.toISOString().split('T')[0];
+                        // console.log(todayFormatted);
+                        table.column(4).search('^' + todayFormatted, true, false).draw();
+                        break;
+                    case 'this_week':
+                        const firstDayOfWeekFormatted = firstDayOfWeek.toISOString().split('T')[0];
+                        table.column(4).search('>' + firstDayOfWeekFormatted, true, false).draw();
+                        break;
+                    case 'this_month':
+                        const firstDayOfMonthFormatted = firstDayOfMonth.toISOString().split('T')[0];
+                        table.column(4).search('>' + firstDayOfMonthFormatted, true, false).draw();
+                        break;
                 }
             });
 

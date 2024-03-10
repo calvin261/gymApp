@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->text('descripcion');
             $table->json('horario')->nullable();
             $table->unsignedBigInteger('entrenador_id');
             $table->foreign('entrenador_id')->references('id')->on('entrenadores');

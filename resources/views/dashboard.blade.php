@@ -26,7 +26,7 @@
                     <h3 class="text-3xl font-semibold text-center my-5">Cursos del Cliente</h3>
                 </div>
                 @foreach ($client->cursos as $curso)
-                    <div class="h-64 my-5 sm:px-2 lg:px-4">
+                    <div class=" my-5 sm:px-2 lg:px-4">
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                             <div class="bg-white shadow-md rounded-lg p-6">
                                 <div class="flex items-center">
@@ -44,6 +44,29 @@
                                                 d="M6.854 3.646a.5.5 0 0 1 .708 0l5.5 5.5a.5.5 0 0 1 0 .708l-5.5 5.5a.5.5 0 0 1-.708-.708L11.793 9 6.854 4.146a.5.5 0 0 1 0-.708z" />
                                         </svg>
                                         <p class="ml-1"> {{ $curso->descripcion }}</p>
+                                    </div>
+                                    <div>
+                                        @php
+                                            $horario = json_decode($curso->horario, true);
+                                        @endphp
+
+                                        @if ($horario)
+                                            <ul>
+                                                @foreach ($horario as $dia => $horas)
+                                                    <li>
+                                                        <strong>{{ ucfirst($dia) }}:</strong>
+                                                        <ul>
+                                                            <li>Hora de inicio:
+                                                                {{ date('H:i', strtotime($horas['hora_inicio'])) }}</li>
+                                                            <li>Hora de fin:
+                                                                {{ date('H:i', strtotime($horas['hora_fin'])) }}</li>
+                                                        </ul>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <span class="text-red-500">Sin horario asignado</span>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -426,10 +449,11 @@
                                 <p class="ml-1 text-sm">/ mes</p>
                             </div>
                             <div class="mt-4">
-                                @if ($client->plan->pagado == 0)
+                                @if (!$client->pagado)
                                     <div class="flex space-x-5">
                                         <button wire:click="$set('modalPagar', true)"
-                                            class="w-full bg-blue-500 text-white rounded-lg py-2 font-semibold hover:bg-blue-600
+                                            class="w-full bg-blue-500 text-white rounded-lg py-2 px-3 font-semibold
+                                             hover:bg-blue-600
                                             focus:outline-none focus:bg-blue-600 transition duration-300">Pagar</button>
                                         <x-button class="bg-gray-600 px-3 py-2 rounded-lg text-white hover:bg-gray-800"
                                             wire:click="udpateClientPlan({{ $client }})">Cambiar de
@@ -439,12 +463,12 @@
                                     <div class="flex space-x-5">
                                         <a href="{{ route('clients.comprobante', $client) }}">
                                             <button
-                                                class="w-full bg-blue-500 text-white rounded-lg py-2 font-semibold hover:bg-blue-600
+                                                class="w-full bg-blue-500 text-white rounded-lg py-2 px-3  font-semibold
+                                                 hover:bg-blue-600
                                                 focus:outline-none focus:bg-blue-600 transition duration-300">Imprimir
                                                 Comprobante</button>
                                         </a>
-                                        <x-button
-                                            class="bg-gray-600 m-5 px-3 py-2 rounded-lg text-white hover:bg-gray-800"
+                                        <x-button class="bg-gray-600 px-3 py-2 rounded-lg text-white hover:bg-gray-800"
                                             wire:click="udpateClientPlan({{ $client }})">Cambiar de
                                             Plan</x-button>
                                     </div>
@@ -501,83 +525,9 @@
 
         </div>
 
-        {{-- @foreach ($rutinas as $rutina)
-            <div class="h-64 sm:px-2 lg:px-4">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="bg-white shadow-md rounded-lg p-6">
 
-                        <div class="flex items-center">
-
-                            <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                                <a href="https://laravel.com/docs"
-                                    class="hover:text-blue-500">Rutinas</a>
-                            </h2>
-                        </div>
-                        <div class="grid grid-cols-2 gap-x-4 mt-4 text-gray-500 text-sm">
-                            <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    class="w-4 h-4 mr-1.5 fill-current text-gray-500">
-                                    <path fill-rule="evenodd"
-                                        d="M6.854 3.646a.5.5 0 0 1 .708 0l5.5 5.5a.5.5 0 0 1 0
-                                         .708l-5.5 5.5a.5.5 0 0 1-.708-.708L11.793 9 6.854 4.146a.5.5 0 0 1 0-.708z" />
-                                </svg>
-                                <p class="font-semibold">Nombre:</p>
-                                <p class="ml-1">{!! $rutina->Nombre !!}</p>
-                            </div>
-                        </div>
-                        <button wire:click="udpateClientRutina({{ $client }},{{ $rutina->id }})"
-                            class="bg-blue-600 m-5 px-3 py-2
-                                 rounded-lg text-white hover:bg-blue-800">Escojer</button>
-
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        @endif --}}
     </div>
-    {{-- @if (!$client->plan)
-        <h3 class="text-3xl font-semibold text-center my-5">Escoja un Plan</h3>
 
-
-        <div class="grid grid-cols-4  gap-4 max-w-7xl mx-auto">
-            @foreach ($plans as $plan)
-                <div class="h-64 sm:px-2 lg:px-4">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        <div class="bg-white shadow-md rounded-lg p-6">
-
-                            <div class="flex items-center">
-
-                                <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                                    <a href="https://laravel.com/docs"
-                                        class="hover:text-blue-500">Plan {{ $plan->nombre }}</a>
-                                </h2>
-                            </div>
-                            <div class="grid grid-cols-2 gap-x-4 mt-4 text-gray-500 text-sm">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        class="w-4 h-4 mr-1.5 fill-current text-gray-500">
-                                        <path fill-rule="evenodd"
-                                            d="M6.854 3.646a.5.5 0 0 1 .708 0l5.5 5.5a.5.5 0 0 1 0
-                                 .708l-5.5 5.5a.5.5 0 0 1-.708-.708L11.793 9 6.854 4.146a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-
-                                    <p class="ml-1"> {{ $plan->descripcion }}</p>
-                                </div>
-
-                            </div>
-
-                            <button wire:click="udpateClientPlan({{ $client }},{{ $plan->id }})"
-                                class="bg-blue-600 m-5 px-3 py-2
-                         rounded-lg text-white hover:bg-blue-800">Escojer</button>
-
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    @endif --}}
 
     @if ($client->plan)
         <x-dialog-modal wire:model.live="modalPagar">

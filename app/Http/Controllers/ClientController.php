@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Curso;
 use App\Models\Plan;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Browsershot\Browsershot;
 
-use function Spatie\LaravelPdf\Support\pdf;
 
 class ClientController extends Controller
 {
@@ -20,7 +19,23 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        if (Auth::user()->entrenador) {
+            $cursos = Curso::with(['clientes'])
+                ->where('entrenador_id', Auth::user()->entrenador->id)
+                ->get();
+            $clients = collect(); // Inicializa una colección vacía para los estados de salud
+
+            foreach ($cursos as $curso) {
+                // Itera sobre los clientes del curso para obtener sus estados de salud
+                foreach ($curso->clientes as $cliente) {
+                    // Verifica si el cliente tiene un estado de salud
+                    $clients->push($cliente);
+                }
+            }
+        } else {
+            $clients = Client::all();
+        }
+
         return view('admin.clients.index', compact('clients'));
     }
 

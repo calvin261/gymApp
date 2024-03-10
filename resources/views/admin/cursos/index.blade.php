@@ -8,11 +8,19 @@
         <a href="{{ route('cursos.create') }}">
             <x-button class="bg-green-400 mb-5 hover:bg-green-600">Crear un nuevo curso</x-button>
         </a>
+        <div>
+            <label for="date_filter">Filtrar por fecha de ingreso:</label>
+            <select id="date_filter">
+                <option value="today">Hoy</option>
+                <option value="this_week">Esta semana</option>
+                <option value="this_month">Este mes</option>
+            </select>
+        </div>
         <x-table>
             @if ($cursos->count())
                 <table aria-describedby="cursos"
                     class="min-w-full divide-y divide-gray-200"
-                    id="cursos_table">
+                    id="especialidad_table">
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col"
@@ -30,6 +38,10 @@
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Entrenador
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Fecha de Creacion
                             </th>
                             <th scope="col"
                                 class="relative px-6 py-3">
@@ -74,13 +86,15 @@
                                         <span class="text-red-500">Sin horario asignado</span>
                                     @endif
                                 </td>
-
                                 <td class="px-6 py-4">
                                     @if ($curso->entrenador && $curso->entrenador->nombre)
                                         {{ $curso->entrenador->nombre }}
                                     @else
                                         <span class="text-red-500">Sin entrenador asignado</span>
                                     @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $curso->created_at }}
                                 </td>
                                 <td>
                                     <a class="py-1 px-2 bg-blue-400 text-sm text-white rounded-full"
@@ -117,7 +131,8 @@
         type="text/javascript"></script>
     <script>
         $(document).ready(function() {
-            new DataTable('#cursos_table', {
+
+            const table = new DataTable('#especialidad_table', {
 
                 language: {
                     info: '_PAGE_ de _PAGES_',
@@ -126,6 +141,33 @@
                     lengthMenu: 'Mostrando _MENU_ registros',
                     search: "Buscar: ",
                     zeroRecords: 'No hay coincidencias'
+                }
+            });
+
+            $('#date_filter').on('change', function() {
+                const filterValue = $(this).val();
+                const today = new Date();
+                const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+                const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+                switch (filterValue) {
+                    case 'today':
+                        console.log(today);
+                        const todayFormatted = "2024-03-09"
+                        console.log(todayFormatted);
+                        // const todayFormatted = today.toISOString().split('T')[0];
+                        // console.log(todayFormatted);
+                        table.column(4).search('^' + todayFormatted, true, false).draw();
+                        break;
+                    case 'this_week':
+                        const firstDayOfWeekFormatted = firstDayOfWeek.toISOString().split('T')[0];
+
+                        table.column(4).search('>' + firstDayOfWeekFormatted, true, false).draw();
+                        break;
+                    case 'this_month':
+                        const firstDayOfMonthFormatted = firstDayOfMonth.toISOString().split('T')[0];
+                        table.column(4).search('>' + firstDayOfMonthFormatted, true, false).draw();
+                        break;
                 }
             });
 

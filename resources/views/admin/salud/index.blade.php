@@ -5,9 +5,18 @@
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-10">
-        {{-- <a href="{{ route('clients.create') }}">
-            <x-button class="bg-green-400 mb-5 hover:bg-green-600">Crear una nuevo client</x-button>
-        </a> --}}
+        <a href="{{ route('saluds.create') }}">
+            <x-button class="bg-green-400 m-5 hover:bg-green-600">Registrar estado
+                fisico</x-button>
+        </a>
+        <div>
+            <label for="date_filter">Filtrar por fecha de ingreso:</label>
+            <select id="date_filter">
+                <option value="today">Hoy</option>
+                <option value="this_week">Esta semana</option>
+                <option value="this_month">Este mes</option>
+            </select>
+        </div>
         <x-table>
             @if ($saluds->count())
                 <table aria-describedby="usuarios"
@@ -27,10 +36,7 @@
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Género
                             </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Fecha de Ingreso
-                            </th>
+
 
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -50,9 +56,12 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Fecha de Creacion
+                                Fecha de Ingreso
                             </th>
-
+                            <th scope="col"
+                                class="relative px-6 py-3">
+                                <span class="sr-only">Editar</span>
+                            </th>
                             <th scope="col"
                                 class="relative px-6 py-3">
                                 <span class="sr-only">Eliminar</span>
@@ -72,10 +81,6 @@
                                     {{ $salud->genero }}
                                 </td>
                                 <td class="px-6 py-4 ">
-                                    {{ $salud->client->created_at }}
-                                </td>
-
-                                <td class="px-6 py-4 ">
                                     {{ $salud->altura }}
                                 </td>
                                 <td class="px-6 py-4 ">
@@ -88,7 +93,11 @@
                                     {{ $salud->observaciones }}
                                 </td>
                                 <td class="px-6 py-4 ">
-                                    {{ $salud->created_at }}
+                                    {{ $salud->client->created_at }}
+                                </td>
+                                <td>
+                                    <a class="py-1 px-2 bg-blue-400 text-sm text-white rounded-full"
+                                        href="{{ route('saluds.edit', $salud) }}">Editar</a>
                                 </td>
                                 <td>
                                     <form action="{{ route('saluds.destroy', $salud) }}"
@@ -121,7 +130,7 @@
         type="text/javascript"></script>
     <script>
         $(document).ready(function() {
-            new DataTable('#especialidad_table', {
+            const table =  new DataTable('#especialidad_table', {
 
                 language: {
                     info: '_PAGE_ de _PAGES_',
@@ -133,7 +142,32 @@
                 }
             });
 
+            $('#date_filter').on('change', function() {
+                const filterValue = $(this).val();
+                const today = new Date();
+                const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+                const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
+                switch (filterValue) {
+                    case 'today':
+                        console.log(today);
+                        const todayFormatted = "2024-03-09"
+                        console.log(todayFormatted);
+                        // const todayFormatted = today.toISOString().split('T')[0];
+                        // console.log(todayFormatted);
+                        table.column(7).search('^' + todayFormatted, true, false).draw();
+                        break;
+                    case 'this_week':
+                        const firstDayOfWeekFormatted = firstDayOfWeek.toISOString().split('T')[0];
+                        console.log(todayFormatted);
+                        table.column(7).search('>' + firstDayOfWeekFormatted, true, false).draw();
+                        break;
+                    case 'this_month':
+                        const firstDayOfMonthFormatted = firstDayOfMonth.toISOString().split('T')[0];
+                        table.column(7).search('>' + firstDayOfMonthFormatted, true, false).draw();
+                        break;
+                }
+            });
         })
     </script>
 </x-app-layout>

@@ -19,7 +19,6 @@ class SaludFactory extends Factory
     {
         return [
             "genero" => $this->faker->randomElement(['Masculino', 'Femenino']),
-            "calorias" => $this->faker->numberBetween(120, 200),
             "altura" => $this->faker->numberBetween(120, 200),
             "peso" => $this->faker->numberBetween(120, 200),
             "imc" => $this->faker->numberBetween(120, 200),

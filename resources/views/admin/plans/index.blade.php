@@ -8,6 +8,34 @@
         <a href="{{ route('plans.create') }}">
             <x-button class="bg-green-400 mb-5 hover:bg-green-600">Crear una nuevo plan</x-button>
         </a>
+        <div class="flex space-x-5">
+            <table aria-describedby="a"
+                class="inputs">
+                <th></th>
+                <tbody>
+                    <tr>
+                        <td>Precio Minimo:</td>
+                        <td><input type="text"
+                                id="min"
+                                name="min"></td>
+                    </tr>
+                    <tr>
+                        <td>Precio Maximo:</td>
+                        <td><input type="text"
+                                id="max"
+                                name="max"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <label for="date_filter">Filtrar por fecha:</label>
+                <select id="date_filter">
+                    <option value="today">Hoy</option>
+                    <option value="this_week">Esta semana</option>
+                    <option value="this_month">Este mes</option>
+                </select>
+            </div>
+        </div>
         <x-table>
             @if ($plans->count())
                 <table aria-describedby="usuarios"
@@ -99,7 +127,10 @@
         type="text/javascript"></script>
     <script>
         $(document).ready(function() {
-            new DataTable('#especialidad_table', {
+            const minEl = document.querySelector('#min');
+            const maxEl = document.querySelector('#max');
+
+            const table = new DataTable('#especialidad_table', {
 
                 language: {
                     info: '_PAGE_ de _PAGES_',
@@ -111,6 +142,59 @@
                 }
             });
 
+            // Custom range filtering function
+            table.search.fixed('range', function(searchStr, data, index) {
+
+                var min = parseInt(minEl.value, 10);
+                var max = parseInt(maxEl.value, 10);
+                var age = parseFloat(data[2]) || 0; // use data for the age column
+
+                if (
+                    (isNaN(min) && isNaN(max)) ||
+                    (isNaN(min) && age <= max) ||
+                    (min <= age && isNaN(max)) ||
+                    (min <= age && age <= max)
+                ) {
+                    return true;
+                }
+
+                return false;
+            });
+
+            // Changes to the inputs will trigger a redraw to update the table
+            minEl.addEventListener('input', function() {
+                table.draw();
+            });
+            maxEl.addEventListener('input', function() {
+                table.draw();
+            });
+
+            $('#date_filter').on('change', function() {
+                const filterValue = $(this).val();
+                const today = new Date();
+                const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+                const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+                switch (filterValue) {
+                    case 'today':
+                        console.log(today);
+                        const todayFormatted = "2024-03-09"
+                        // console.log(todayFormatted);
+                        // const todayFormatted = today.toISOString().split('T')[0];
+                        // console.log(todayFormatted);
+                        table.column(4).search('^' + todayFormatted, true, false).draw();
+                        break;
+                    case 'this_week':
+                        const firstDayOfWeekFormatted = firstDayOfWeek.toISOString().split('T')[0];
+                        console.log(todayFormatted);
+                        table.column(4).search('>' + firstDayOfWeekFormatted, true, false).draw();
+                        break;
+                    case 'this_month':
+                        const firstDayOfMonthFormatted = firstDayOfMonth.toISOString().split('T')[0];
+                        table.column(4).search('>' + firstDayOfMonthFormatted, true, false).draw();
+                        break;
+                }
+            });
 
         })
     </script>

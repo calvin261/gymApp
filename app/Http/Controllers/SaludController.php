@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Curso;
 use App\Models\Salud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,27 @@ class SaludController extends Controller
      */
     public function index()
     {
-        $saluds = Salud::all();
+        if (Auth::user()->entrenador) {
+            $cursos = Curso::with(['clientes', 'clientes.salud'])
+                ->where('entrenador_id', Auth::user()->entrenador->id)
+                ->get();
+            $saluds = collect(); // Inicializa una colección vacía para los estados de salud
+
+            foreach ($cursos as $curso) {
+                // Itera sobre los clientes del curso para obtener sus estados de salud
+                foreach ($curso->clientes as $cliente) {
+                    // Verifica si el cliente tiene un estado de salud
+                    if ($cliente->salud) {
+                        // Agrega el estado de salud del cliente a la colección
+                        $saluds->push($cliente->salud);
+                    }
+                }
+            }
+        } else {
+            // Si el usuario no es un entrenador, obtén todos los estados de salud
+            $saluds = Salud::all();
+        }
+
         return view('admin.salud.index', compact('saluds'));
     }
 
@@ -23,7 +44,23 @@ class SaludController extends Controller
      */
     public function create()
     {
-        return view('admin.salud.create');
+        if (Auth::user()->entrenador) {
+            $cursos = Curso::with(['clientes', 'clientes.salud'])
+                ->where('entrenador_id', Auth::user()->entrenador->id)
+                ->get();
+            $clientes = collect(); // Inicializa una colección vacía para los estados de salud
+
+            foreach ($cursos as $curso) {
+                // Itera sobre los clientes del curso para obtener sus estados de salud
+                foreach ($curso->clientes as $cliente) {
+                    // Verifica si el cliente tiene un estado de salud
+                    $clientes->push($cliente);
+                }
+            }
+        } else {
+            $clientes = Client::all();
+        }
+        return view('admin.salud.create', compact('clientes'));
     }
 
     /**
@@ -35,17 +72,15 @@ class SaludController extends Controller
         $valid_number = 'required|numeric';
         $request->validate([
             'genero' => 'required',
-
+            'client_id' => 'required',
             'altura' => $valid_number,
             'peso' => $valid_number,
             'imc' => $valid_number,
         ]);
-        $user = Auth::user();
-        $client = Client::where('correo', $user->email)->firstOrFail();
-        $salud = new Salud($request->all());
-        $salud->client_id = $client->id;
-        $salud->save();
 
+        $client = Client::findOrFail($request->client_id);
+
+        Salud::create($request->all());
 
         registrarAccionAuditoria(Auth::user(), 'Creación de Registro de Salud', sprintf(
             'El usuario %s ha creado un registro de salud para el cliente %s',
@@ -68,8 +103,24 @@ class SaludController extends Controller
      */
     public function edit(string $id)
     {
+        if (Auth::user()->entrenador) {
+            $cursos = Curso::with(['clientes', 'clientes.salud'])
+                ->where('entrenador_id', Auth::user()->entrenador->id)
+                ->get();
+            $clientes = collect(); // Inicializa una colección vacía para los estados de salud
+
+            foreach ($cursos as $curso) {
+                // Itera sobre los clientes del curso para obtener sus estados de salud
+                foreach ($curso->clientes as $cliente) {
+                    // Verifica si el cliente tiene un estado de salud
+                    $clientes->push($cliente);
+                }
+            }
+        } else {
+            $clientes = Client::all();
+        }
         $salud = Salud::find($id);
-        return view('admin.salud.edit', compact('salud'));
+        return view('admin.salud.edit', compact('salud', 'clientes'));
     }
 
     /**
@@ -77,10 +128,9 @@ class SaludController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = Auth::user();
-        $client = Client::where('correo', $user->email)->firstOrFail();
+
+        $client = Client::findOrFail($request->client_id);
         $salud = Salud::find($id);
-        $salud->client_id = $client->id;
         $salud->update($request->all());
         registrarAccionAuditoria(Auth::user(), 'Actualización de Registro de Salud', sprintf(
             'El usuario %s ha actualizado un registro de salud para el cliente %s',
@@ -88,7 +138,7 @@ class SaludController extends Controller
             $client->nombre
         ));
 
-        return redirect()->route('dashboard');
+        return redirect()->route('saluds.index');
     }
 
     /**

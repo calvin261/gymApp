@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string("direccion");
             $table->string("provincia");
             $table->string("ciudad");
-            $table->bigInteger('plan_id')->unsigned()->nullable();
-            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
+            $table->boolean('pagado')->default(false);
+            $table->unsignedBigInteger('plan_id')->nullable();
+            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('set null');
             $table->bigInteger('rutina_id')->unsigned()->nullable();
             $table->foreign('rutina_id')->references('id')->on('rutinas')->onDelete('cascade');
             // Agregar la clave foránea para la relación con usuarios

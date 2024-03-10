@@ -15,7 +15,11 @@ class CursoController extends Controller
      */
     public function index()
     {
-        $cursos = Curso::all();
+        if (Auth::user()->entrenador) {
+            $cursos = Curso::where('entrenador_id', Auth::user()->entrenador->id)->get();
+        } else {
+            $cursos = Curso::all();
+        }
         return view('admin.cursos.index', compact('cursos'));
     }
 
@@ -24,7 +28,11 @@ class CursoController extends Controller
      */
     public function create()
     {
-        $entrenadores = Entrenadore::all();
+        if (Auth::user()->entrenador) {
+            $entrenadores = Entrenadore::where('id', Auth::user()->entrenador->id)->get();
+        } else {
+            $entrenadores = Entrenadore::all();
+        }
         return view('admin.cursos.create', compact('entrenadores'));
     }
 
@@ -91,7 +99,11 @@ class CursoController extends Controller
     public function edit(string $id)
     {
         $curso = Curso::findOrFail($id);
-        $entrenadores = Entrenadore::all();
+        if (Auth::user()->entrenador) {
+            $entrenadores = Entrenadore::where('id', Auth::user()->entrenador->id)->get();
+        } else {
+            $entrenadores = Entrenadore::all();
+        }
         return view('admin.cursos.edit', compact('curso', 'entrenadores'));
     }
 
@@ -112,8 +124,13 @@ class CursoController extends Controller
 
         // Crear el horario en formato JSON
         $horario = [];
+
         foreach ($dias as $key => $dia) {
-            if (!empty($horasInicio[$key]) && !empty($horasFin[$key])) {
+            // Verifica si la hora de inicio y la hora de fin no están vacías o son null
+            if (
+                isset($horasInicio[$key]) && isset($horasFin[$key]) &&
+                ($horasInicio[$key] !== null) && ($horasFin[$key] !== null)
+            ) {
                 $horario[$dia] = [
                     'hora_inicio' => $horasInicio[$key],
                     'hora_fin' => $horasFin[$key]

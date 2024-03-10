@@ -67,11 +67,18 @@
                                     </div>
                                 </div>
                                 <div class="px-4 py-3  text-right sm:px-6">
+                                   <a href="{{ route('plans.index') }}"> <button type="button"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent
+                                shadow-sm text-sm font-medium rounded-md text-white bg-gray-600
+                                hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                focus:ring-gray-500">
+                                    Regresar
+                                </button></a>
                                     <button type="submit"
                                         class="inline-flex justify-center py-2 px-4 border border-transparent
-                                        shadow-sm text-sm font-medium rounded-md text-white bg-red-600
-                                        hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                        focus:ring-red-500">
+                                        shadow-sm text-sm font-medium rounded-md text-white bg-blue-600
+                                        hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                        focus:ring-blue-500">
                                         Guardar
                                     </button>
                                 </div>

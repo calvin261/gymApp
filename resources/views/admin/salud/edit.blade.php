@@ -32,7 +32,6 @@
                                         </select>
                                     </div>
                                     <div class="flex justify-between">
-
                                         <div>
                                             <label for="first_name"
                                                 class="block text-sm font-medium text-gray-700">Altura (cm)</label>
@@ -44,6 +43,22 @@
                                                 autocomplete="false"
                                                 class="mt-1 focus:ring-red-500 focus:border-red-500 block w-full
                                                 shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div>
+                                            <x-label for="direccion"
+                                                value="{{ __('Clientes') }}" />
+                                            <select
+                                                class="border-gray-300 focus:border-indigo-500
+                                             focus:ring-indigo-500 w-56 rounded-md shadow-sm"
+                                                name="client_id">
+                                                <option value="">Selecciona un cliente</option>
+                                                @foreach ($clientes as $cliente)
+                                                    <option value="{{ $cliente->id }}"
+                                                        {{ $cliente->id == $salud->client_id ? 'selected' : '' }}>
+                                                        {{ $cliente->nombre }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="flex justify-between">
@@ -67,7 +82,7 @@
                                                 placeholder="0.00"
                                                 id="imc"
                                                 step="any"
-                                                value="{{ $salud->grasa }}"
+                                                value="{{ $salud->imc }}"
                                                 autocomplete="false"
                                                 class="mt-1 focus:ring-red-500 focus:border-red-500 block w-full
                                                 shadow-sm sm:text-sm border-gray-300 rounded-md">
@@ -87,11 +102,18 @@
 
                                 </div>
                                 <div class="px-4 py-3  text-right sm:px-6">
+                                    <a href="{{ route('saluds.index') }}"> <button type="button"
+                                            class="inline-flex justify-center py-2 px-4 border border-transparent
+                                shadow-sm text-sm font-medium rounded-md text-white bg-gray-600
+                                hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                focus:ring-gray-500">
+                                            Regresar
+                                        </button></a>
                                     <button type="submit"
                                         class="inline-flex justify-center py-2 px-4 border border-transparent
-                                        shadow-sm text-sm font-medium rounded-md text-white bg-red-600
-                                        hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                        focus:ring-red-500">
+                                        shadow-sm text-sm font-medium rounded-md text-white bg-blue-600
+                                        hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                        focus:ring-blue-500">
                                         Guardar
                                     </button>
                                 </div>
