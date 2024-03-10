@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+        <p>GYMSITE</p>
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -40,7 +40,7 @@
                         value="{{ __('Telefono') }}" />
                     <x-input id="telefono"
                         class="block mt-1 w-full"
-                        type="number"
+                        type="text"
                         name="telefono"
                         required />
                 </div>

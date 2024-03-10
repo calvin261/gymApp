@@ -13,9 +13,7 @@
         </select>
     </div>
     <div class=" mx-auto sm:px-6 lg:px-8 py-10">
-        <a href="{{ route('clients.create') }}">
-            <x-button class="bg-green-400 mb-5 hover:bg-green-600">Crear una nuevo client</x-button>
-        </a>
+       
         <x-table>
             @if ($clients->count())
                 <table aria-describedby="usuarios"
@@ -143,7 +141,7 @@
                 switch (filterValue) {
                     case 'today':
                         console.log(today);
-                        const todayFormatted = "2024-03-09"
+                        const todayFormatted = "2024-03-10"
                         console.log(todayFormatted);
                         // const todayFormatted = today.toISOString().split('T')[0];
                         // console.log(todayFormatted);

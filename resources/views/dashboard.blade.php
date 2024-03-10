@@ -6,20 +6,7 @@
     </x-slot>
 
     <div class="py-12  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        @if (!$salud)
-            <div class="h-64 sm:px-2 lg:px-4">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="bg-white shadow-md rounded-lg p-6">
-
-                        <a href="{{ route('saluds.create') }}">
-                            <x-button class="bg-green-400 m-5 hover:bg-green-600">Registrar mi estado
-                                fisico</x-button>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        @endif
+     
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-7xl mx-auto">
             @if ($client->cursos->isNotEmpty())
                 <div class="col-span-full">
@@ -68,6 +55,9 @@
                                             <span class="text-red-500">Sin horario asignado</span>
                                         @endif
                                     </div>
+                                </div>
+                                <div class="flex space-x-5">
+                                    <strong>Entrenador: </strong> <p> {{$curso->entrenador->nombre }}</p>
                                 </div>
 
                             </div>
@@ -360,22 +350,12 @@
                             <div class="flex items-center">
 
                                 <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                                    <a href="https://laravel.com/docs"
-                                        class="hover:text-blue-500">Estado de Salud</a>
+                                    <p
+                                        class="hover:text-blue-500">Estado de Salud</p>
                                 </h2>
                             </div>
                             <div class="grid grid-cols-2 gap-x-4 mt-4 text-gray-500 text-sm">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        class="w-4 h-4 mr-1.5 fill-current text-gray-500">
-                                        <path fill-rule="evenodd"
-                                            d="M6.854 3.646a.5.5 0 0 1 .708 0l5.5 5.5a.5.5 0 0 1 0
-                                             .708l-5.5 5.5a.5.5 0 0 1-.708-.708L11.793 9 6.854 4.146a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                    <p class="font-semibold">Calorías:</p>
-                                    <p class="ml-1">{{ $salud->calorias }}</p>
-                                </div>
+                               
                                 <div class="flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
@@ -410,12 +390,9 @@
                                     <p class="font-semibold">IMC:</p>
                                     <p class="ml-1">{{ $salud->imc }}</p>
                                 </div>
-                                <div>
-                                    <a href="{{ route('saluds.edit', $salud) }}">
-                                        <button
-                                            class="bg-blue-600 m-5 px-3 py-2
-                                         rounded-lg text-white hover:bg-blue-800">Actualizar</button>
-                                    </a>
+                                <div class="flex space-x-10">
+                                <p class="font-semibold">Observaciones:</p>
+                                    <p class="ml-1">{{ $salud->observaciones }}</p>
                                 </div>
                             </div>
 

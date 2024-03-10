@@ -147,7 +147,7 @@
 
                 var min = parseInt(minEl.value, 10);
                 var max = parseInt(maxEl.value, 10);
-                var age = parseFloat(data[2]) || 0; // use data for the age column
+                var age = parseFloat(data[3]) || 0; // use data for the age column
 
                 if (
                     (isNaN(min) && isNaN(max)) ||
@@ -178,7 +178,7 @@
                 switch (filterValue) {
                     case 'today':
                         console.log(today);
-                        const todayFormatted = "2024-03-09"
+                        const todayFormatted = "2024-03-10"
                         // console.log(todayFormatted);
                         // const todayFormatted = today.toISOString().split('T')[0];
                         // console.log(todayFormatted);
@@ -190,7 +190,8 @@
                         table.column(4).search('>' + firstDayOfWeekFormatted, true, false).draw();
                         break;
                     case 'this_month':
-                        const firstDayOfMonthFormatted = firstDayOfMonth.toISOString().split('T')[0];
+                        const firstDayOfMonthFormatted ="2024-03-10"
+                        console.log(firstDayOfMonthFormatted)
                         table.column(4).search('>' + firstDayOfMonthFormatted, true, false).draw();
                         break;
                 }

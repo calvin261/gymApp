@@ -131,7 +131,7 @@
                 switch (filterValue) {
                     case 'today':
                         console.log(today);
-                        const todayFormatted = "2024-03-09"
+                        const todayFormatted = "2024-03-10"
                         console.log(todayFormatted);
                         // const todayFormatted = today.toISOString().split('T')[0];
                         // console.log(todayFormatted);
