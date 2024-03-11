@@ -31,8 +31,9 @@
                 <label for="date_filter">Filtrar por fecha:</label>
                 <select id="date_filter">
                     <option value="today">Hoy</option>
-                    <option value="this_week">Esta semana</option>
                     <option value="this_month">Este mes</option>
+                    <option value="last_month">Mes pasado</option>
+                    <option value="this_year">Este año</option>
                 </select>
             </div>
         </div>
@@ -125,6 +126,18 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.tailwindcss.js"
         type="text/javascript"></script>
+    <link rel="stylesheet"
+        type="text/css"
+        href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css">
+
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script>
         $(document).ready(function() {
             const minEl = document.querySelector('#min');
@@ -139,7 +152,8 @@
                     lengthMenu: 'Mostrando _MENU_ registros',
                     search: "Buscar: ",
                     zeroRecords: 'No hay coincidencias'
-                }
+                },
+                buttons: ['pdfHtml5'] // Habilitar el botón de exportar a PDF
             });
 
             // Custom range filtering function
@@ -147,7 +161,7 @@
 
                 var min = parseInt(minEl.value, 10);
                 var max = parseInt(maxEl.value, 10);
-                var age = parseFloat(data[2]) || 0; // use data for the age column
+                var age = parseFloat(data[3]) || 0; // use data for the age column
 
                 if (
                     (isNaN(min) && isNaN(max)) ||
@@ -171,31 +185,45 @@
 
             $('#date_filter').on('change', function() {
                 const filterValue = $(this).val();
-                const today = new Date();
-                const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
-                const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+                let today = new Date();
+                today.setHours(today.getHours() - 5); // Restar 5 horas
+                today = today.toISOString().split('T')[0]; // Formato ISO sin hora
 
                 switch (filterValue) {
                     case 'today':
-                        console.log(today);
-                        const todayFormatted = "2024-03-09"
-                        // console.log(todayFormatted);
-                        // const todayFormatted = today.toISOString().split('T')[0];
-                        // console.log(todayFormatted);
-                        table.column(4).search('^' + todayFormatted, true, false).draw();
+                        table.columns(4).search('>' + today, true, false).draw();
                         break;
-                    case 'this_week':
-                        const firstDayOfWeekFormatted = firstDayOfWeek.toISOString().split('T')[0];
-                        console.log(todayFormatted);
-                        table.column(4).search('>' + firstDayOfWeekFormatted, true, false).draw();
-                        break;
+
                     case 'this_month':
-                        const firstDayOfMonthFormatted = firstDayOfMonth.toISOString().split('T')[0];
-                        table.column(4).search('>' + firstDayOfMonthFormatted, true, false).draw();
+                        const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(),
+                            1);
+                        const firstDayOfMonthISO = firstDayOfMonth.toISOString().split('T')[
+                            0]; // Formato ISO sin hora
+                        const yearAndMonth = firstDayOfMonthISO.substr(0, 7); // Año y mes
+                        table.columns(4).search('^' + yearAndMonth, true, false).draw();
+                        break;
+                    case 'last_month':
+                        const lastMonth = new Date();
+                        lastMonth.setMonth(lastMonth.getMonth() - 1);
+                        const firstDayOfLastMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth(),
+                            1);
+                        const lastDayOfLastMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() +
+                            1, 0);
+                        const firstDayOfLastMonthISO = firstDayOfLastMonth.toISOString().split('T')[
+                            0]; // Formato ISO sin hora
+                        const lastDayOfLastMonthISO = lastDayOfLastMonth.toISOString().split('T')[
+                            0]; // Formato ISO sin hora
+                        console.log(`^>=${firstDayOfLastMonthISO} <=${lastDayOfLastMonthISO}`)
+                        table.columns(4).search(`^>=${firstDayOfLastMonthISO} <=${lastDayOfLastMonthISO}`,
+                            true, false).draw();
+                        break;
+                    case 'this_year':
+                        const firstDayOfYear = new Date(new Date().getFullYear(), 0, 1);
+                        const year = firstDayOfYear.getFullYear();
+                        table.columns(4).search('^' + year, true, false).draw();
                         break;
                 }
             });
-
         })
     </script>
 </x-app-layout>

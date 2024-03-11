@@ -82,6 +82,8 @@ class Dashboard extends Component
     public function udpateClientPlan(Client $client, $plan_id = null)
     {
         $client->update(['plan_id' => $plan_id]);
+        $client->pagado = false;
+        $client->save();
         $plan = Rutina::find($plan_id);
 
         registrarAccionAuditoria($client->user, 'Actualización de Plan', sprintf(

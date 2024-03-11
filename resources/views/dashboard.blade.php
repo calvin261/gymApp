@@ -21,12 +21,15 @@
             </div>
         @endif
         <div class="grid grid-cols-1 gap-4 mx-auto sm:grid-cols-2 max-w-7xl">
+    <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+     
+        <div class="grid grid-cols-1 gap-4 mx-auto sm:grid-cols-2 max-w-7xl">
             @if ($client->cursos->isNotEmpty())
                 <div class="col-span-full">
                     <h3 class="my-5 text-3xl font-semibold text-center">Cursos del Cliente</h3>
                 </div>
                 @foreach ($client->cursos as $curso)
-                    <div class="my-5  sm:px-2 lg:px-4">
+                    <div class="my-5 sm:px-2 lg:px-4">
                         <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                             <div class="p-6 bg-white rounded-lg shadow-md">
                                 <div class="flex items-center">
@@ -68,6 +71,9 @@
                                             <span class="text-red-500">Sin horario asignado</span>
                                         @endif
                                     </div>
+                                </div>
+                                <div class="flex space-x-5">
+                                    <strong>Entrenador: </strong> <p> {{$curso->entrenador->nombre }}</p>
                                 </div>
 
                             </div>
@@ -403,7 +409,7 @@
                 </div>
             @endif
             @if ($client->plan)
-                <div class="h-64  sm:px-2 lg:px-4">
+                <div class="h-64 sm:px-2 lg:px-4">
                     <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                         <div class="px-4 py-4">
                             <h2 class="text-lg font-semibold text-gray-800">{{ $client->plan->nombre }}</h2>
