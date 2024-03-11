@@ -1,18 +1,18 @@
 <div>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
-    <div class="py-12  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         @if (!$salud)
             <div class="h-64 sm:px-2 lg:px-4">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                    <div class="p-6 bg-white rounded-lg shadow-md">
 
                         <a href="{{ route('saluds.create') }}">
-                            <x-button class="bg-green-400 m-5 hover:bg-green-600">Registrar mi estado
+                            <x-button class="m-5 bg-green-400 hover:bg-green-600">Registrar mi estado
                                 fisico</x-button>
                         </a>
 
@@ -20,22 +20,22 @@
                 </div>
             </div>
         @endif
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 gap-4 mx-auto sm:grid-cols-2 max-w-7xl">
             @if ($client->cursos->isNotEmpty())
                 <div class="col-span-full">
-                    <h3 class="text-3xl font-semibold text-center my-5">Cursos del Cliente</h3>
+                    <h3 class="my-5 text-3xl font-semibold text-center">Cursos del Cliente</h3>
                 </div>
                 @foreach ($client->cursos as $curso)
-                    <div class=" my-5 sm:px-2 lg:px-4">
-                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                            <div class="bg-white shadow-md rounded-lg p-6">
+                    <div class="my-5  sm:px-2 lg:px-4">
+                        <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                            <div class="p-6 bg-white rounded-lg shadow-md">
                                 <div class="flex items-center">
-                                    <h2 class="ms-3 text-xl font-semibold text-gray-900">
+                                    <h2 class="text-xl font-semibold text-gray-900 ms-3">
                                         <a href="https://laravel.com/docs"
                                             class="hover:text-blue-500">Curso: {{ $curso->nombre }}</a>
                                     </h2>
                                 </div>
-                                <div class="grid grid-cols-2 gap-x-4 mt-4 text-gray-500 text-sm">
+                                <div class="grid grid-cols-2 mt-4 text-sm text-gray-500 gap-x-4">
                                     <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -71,8 +71,8 @@
                                 </div>
 
                             </div>
-                            <div class="col-span-1 sm:col-span-2 flex justify-center">
-                                <x-button class="bg-gray-600 m-5 px-3 py-2 rounded-lg text-white hover:bg-gray-800"
+                            <div class="flex justify-center col-span-1 sm:col-span-2">
+                                <x-button class="px-3 py-2 m-5 text-white bg-gray-600 rounded-lg hover:bg-gray-800"
                                     wire:click="udpateClientCursos({{ $client }})">Cambiar de Clase</x-button>
                             </div>
                         </div>
@@ -82,19 +82,19 @@
             @endif
             @if (!$client->cursos->isNotEmpty())
                 <div class="col-span-full">
-                    <h3 class="text-3xl font-semibold text-center my-5">Escoja sus Cursos</h3>
+                    <h3 class="my-5 text-3xl font-semibold text-center">Escoja sus Cursos</h3>
                 </div>
                 @foreach ($cursos as $curso)
                     <div class="h-64 my-5 sm:px-2 lg:px-4">
-                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                            <div class="bg-white shadow-md rounded-lg p-6">
+                        <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                            <div class="p-6 bg-white rounded-lg shadow-md">
                                 <div class="flex items-center">
-                                    <h2 class="ms-3 text-xl font-semibold text-gray-900">
+                                    <h2 class="text-xl font-semibold text-gray-900 ms-3">
                                         <a href="https://laravel.com/docs"
                                             class="hover:text-blue-500">Curso: {{ $curso->nombre }}</a>
                                     </h2>
                                 </div>
-                                <div class="grid grid-cols-2 gap-x-4 mt-4 text-gray-500 text-sm">
+                                <div class="grid grid-cols-2 mt-4 text-sm text-gray-500 gap-x-4">
                                     <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -106,8 +106,7 @@
                                     </div>
                                 </div>
                                 <button wire:click="udpateClientCursos({{ $client }},{{ $curso->id }})"
-                                    class="bg-blue-600 m-5 px-3 py-2 rounded-lg
-                                     text-white hover:bg-blue-800">Escojer</button>
+                                    class="px-3 py-2 m-5 text-white bg-blue-600 rounded-lg hover:bg-blue-800">Escoger</button>
                             </div>
                         </div>
                     </div>
@@ -115,21 +114,21 @@
             @endif
             @if (!$client->rutina)
                 <div class="col-span-full">
-                    <h3 class="text-3xl font-semibold text-center my-5">Escoja una Rutina</h3>
+                    <h3 class="my-5 text-3xl font-semibold text-center">Escoja una Rutina</h3>
                 </div>
                 @foreach ($rutinas as $rutina)
                     <div class="h-64 sm:px-2 lg:px-4">
-                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                            <div class="bg-white shadow-md rounded-lg p-6">
+                        <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                            <div class="p-6 bg-white rounded-lg shadow-md">
 
                                 <div class="flex items-center">
 
-                                    <h2 class="ms-3 text-xl font-semibold text-gray-900">
+                                    <h2 class="text-xl font-semibold text-gray-900 ms-3">
                                         <a href="https://laravel.com/docs"
                                             class="hover:text-blue-500">Rutinas</a>
                                     </h2>
                                 </div>
-                                <div class="grid grid-cols-2 gap-x-4 mt-4 text-gray-500 text-sm">
+                                <div class="grid grid-cols-2 mt-4 text-sm text-gray-500 gap-x-4">
                                     <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -143,8 +142,7 @@
                                     </div>
                                 </div>
                                 <button wire:click="udpateClientRutina({{ $client }},{{ $rutina->id }})"
-                                    class="bg-blue-600 m-5 px-3 py-2
-                                 rounded-lg text-white hover:bg-blue-800">Escojer</button>
+                                    class="px-3 py-2 m-5 text-white bg-blue-600 rounded-lg hover:bg-blue-800">Escoger</button>
 
                             </div>
                         </div>
@@ -153,17 +151,14 @@
             @endif
             @if ($client->rutina)
                 <div class="col-span-full">
-                    <h2 class="text-5xl text-center my-2 font-extrabold dark:text-white">
+                    <h2 class="my-2 text-5xl font-extrabold text-center dark:text-white">
                         {!! $client->rutina->Nombre !!}
                     </h2>
                     <div id="accordion-open"
                         data-accordion="open">
                         <h2 id="accordion-open-heading-1">
                             <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right
-                         text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4
-                          focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700
-                          dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                                class="flex items-center justify-between w-full gap-3 p-5 font-medium text-gray-500 border border-b-0 border-gray-200 rtl:text-right rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                                 data-accordion-target="#accordion-open-body-1"
                                 @if ($dayOfWeek != 'monday') aria-expanded="false"  @else aria-expanded="true" @endif
                                 aria-controls="accordion-open-body-1">
@@ -192,10 +187,7 @@
                         </div>
                         <h2 id="accordion-open-heading-2">
                             <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right
-                         text-gray-500 border border-b-0 border-gray-200 focus:ring-4
-                         focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700
-                          dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                                class="flex items-center justify-between w-full gap-3 p-5 font-medium text-gray-500 border border-b-0 border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                                 data-accordion-target="#accordion-open-body-2"
                                 @if ($dayOfWeek != 'tuesday') aria-expanded="false"  @else aria-expanded="true" @endif
                                 aria-controls="accordion-open-body-2">
@@ -223,10 +215,7 @@
                         </div>
                         <h2 id="accordion-open-heading-3">
                             <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right
-                         text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200
-                          dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400
-                           hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                                class="flex items-center justify-between w-full gap-3 p-5 font-medium text-gray-500 border border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                                 data-accordion-target="#accordion-open-body-3"
                                 @if ($dayOfWeek != 'wednesday') aria-expanded="false"  @else aria-expanded="true" @endif
                                 aria-controls="accordion-open-body-3">
@@ -254,10 +243,7 @@
                         </div>
                         <h2 id="accordion-open-heading-4">
                             <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right
-                         text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200
-                          dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400
-                           hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                                class="flex items-center justify-between w-full gap-3 p-5 font-medium text-gray-500 border border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                                 data-accordion-target="#accordion-open-body-4"
                                 @if ($dayOfWeek != 'thursday') aria-expanded="false"  @else aria-expanded="true" @endif
                                 aria-controls="accordion-open-body-4">
@@ -285,10 +271,7 @@
                         </div>
                         <h2 id="accordion-open-heading-5">
                             <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right
-                         text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200
-                          dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400
-                           hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                                class="flex items-center justify-between w-full gap-3 p-5 font-medium text-gray-500 border border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                                 data-accordion-target="#accordion-open-body-5"
                                 @if ($dayOfWeek != 'friday') aria-expanded="false"  @else aria-expanded="true" @endif
                                 aria-controls="accordion-open-body-5">
@@ -316,10 +299,7 @@
                         </div>
                         <h2 id="accordion-open-heading-6">
                             <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right
-                         text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200
-                          dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400
-                           hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                                class="flex items-center justify-between w-full gap-3 p-5 font-medium text-gray-500 border border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                                 data-accordion-target="#accordion-open-body-6"
                                 @if ($dayOfWeek != 'saturday') aria-expanded="false"  @else aria-expanded="true" @endif
                                 aria-controls="accordion-open-body-6">
@@ -347,24 +327,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-span-1 sm:col-span-2 flex justify-center">
-                    <x-button class="bg-gray-600 m-5 px-3 py-2 rounded-lg text-white hover:bg-gray-800"
+                <div class="flex justify-center col-span-1 sm:col-span-2">
+                    <x-button class="px-3 py-2 m-5 text-white bg-gray-600 rounded-lg hover:bg-gray-800"
                         wire:click="udpateClientRutina({{ $client }})">Cambiar de Rutina</x-button>
                 </div>
             @endif
             @if ($salud)
                 <div class="h-64 sm:px-2 lg:px-4">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        <div class="bg-white shadow-md rounded-lg p-6">
+                    <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                        <div class="p-6 bg-white rounded-lg shadow-md">
 
                             <div class="flex items-center">
 
-                                <h2 class="ms-3 text-xl font-semibold text-gray-900">
+                                <h2 class="text-xl font-semibold text-gray-900 ms-3">
                                     <a href="https://laravel.com/docs"
                                         class="hover:text-blue-500">Estado de Salud</a>
                                 </h2>
                             </div>
-                            <div class="grid grid-cols-2 gap-x-4 mt-4 text-gray-500 text-sm">
+                            <div class="grid grid-cols-2 mt-4 text-sm text-gray-500 gap-x-4">
                                 <div class="flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
@@ -413,8 +393,7 @@
                                 <div>
                                     <a href="{{ route('saluds.edit', $salud) }}">
                                         <button
-                                            class="bg-blue-600 m-5 px-3 py-2
-                                         rounded-lg text-white hover:bg-blue-800">Actualizar</button>
+                                            class="px-3 py-2 m-5 text-white bg-blue-600 rounded-lg hover:bg-blue-800">Actualizar</button>
                                     </a>
                                 </div>
                             </div>
@@ -424,12 +403,12 @@
                 </div>
             @endif
             @if ($client->plan)
-                <div class=" h-64 sm:px-2 lg:px-4">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="h-64  sm:px-2 lg:px-4">
+                    <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                         <div class="px-4 py-4">
                             <h2 class="text-lg font-semibold text-gray-800">{{ $client->plan->nombre }}</h2>
                             <p class="text-sm text-gray-600">{{ $client->plan->descripcion }}</p>
-                            <div class="mt-4 flex items-center text-gray-600">
+                            <div class="flex items-center mt-4 text-gray-600">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
@@ -444,7 +423,7 @@
                                     {{ $client->plan->validez === 1 ? 'mes' : 'meses' }}
                                     de validez</p>
                             </div>
-                            <div class="mt-2 flex items-baseline text-gray-800">
+                            <div class="flex items-baseline mt-2 text-gray-800">
                                 <p class="text-2xl font-semibold">$ {{ $client->plan->precio }}</p>
                                 <p class="ml-1 text-sm">/ mes</p>
                             </div>
@@ -452,10 +431,8 @@
                                 @if (!$client->pagado)
                                     <div class="flex space-x-5">
                                         <button wire:click="$set('modalPagar', true)"
-                                            class="w-full bg-blue-500 text-white rounded-lg py-2 px-3 font-semibold
-                                             hover:bg-blue-600
-                                            focus:outline-none focus:bg-blue-600 transition duration-300">Pagar</button>
-                                        <x-button class="bg-gray-600 px-3 py-2 rounded-lg text-white hover:bg-gray-800"
+                                            class="w-full px-3 py-2 font-semibold text-white transition duration-300 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Pagar</button>
+                                        <x-button class="px-3 py-2 text-white bg-gray-600 rounded-lg hover:bg-gray-800"
                                             wire:click="udpateClientPlan({{ $client }})">Cambiar de
                                             Plan</x-button>
                                     </div>
@@ -463,12 +440,10 @@
                                     <div class="flex space-x-5">
                                         <a href="{{ route('clients.comprobante', $client) }}">
                                             <button
-                                                class="w-full bg-blue-500 text-white rounded-lg py-2 px-3  font-semibold
-                                                 hover:bg-blue-600
-                                                focus:outline-none focus:bg-blue-600 transition duration-300">Imprimir
+                                                class="w-full px-3 py-2 font-semibold text-white transition duration-300 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Imprimir
                                                 Comprobante</button>
                                         </a>
-                                        <x-button class="bg-gray-600 px-3 py-2 rounded-lg text-white hover:bg-gray-800"
+                                        <x-button class="px-3 py-2 text-white bg-gray-600 rounded-lg hover:bg-gray-800"
                                             wire:click="udpateClientPlan({{ $client }})">Cambiar de
                                             Plan</x-button>
                                     </div>
@@ -484,21 +459,21 @@
 
             @if (!$client->plan)
                 <div class="col-span-full">
-                    <h3 class="text-3xl font-semibold text-center my-5">Escoja un Plan</h3>
+                    <h3 class="my-5 text-3xl font-semibold text-center">Escoja un Plan</h3>
                 </div>
                 @foreach ($plans as $plan)
                     <div class="h-64 sm:px-2 lg:px-4">
-                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                            <div class="bg-white shadow-md rounded-lg p-6">
+                        <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                            <div class="p-6 bg-white rounded-lg shadow-md">
 
                                 <div class="flex items-center">
 
-                                    <h2 class="ms-3 text-xl font-semibold text-gray-900">
+                                    <h2 class="text-xl font-semibold text-gray-900 ms-3">
                                         <a href="https://laravel.com/docs"
                                             class="hover:text-blue-500">Plan {{ $plan->nombre }}</a>
                                     </h2>
                                 </div>
-                                <div class="grid grid-cols-2 gap-x-4 mt-4 text-gray-500 text-sm">
+                                <div class="grid grid-cols-2 mt-4 text-sm text-gray-500 gap-x-4">
                                     <div class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -514,8 +489,7 @@
                                 </div>
 
                                 <button wire:click="udpateClientPlan({{ $client }},{{ $plan->id }})"
-                                    class="bg-blue-600 m-5 px-3 py-2
-                         rounded-lg text-white hover:bg-blue-800">Escojer</button>
+                                    class="px-3 py-2 m-5 text-white bg-blue-600 rounded-lg hover:bg-blue-800">Escoger</button>
 
                             </div>
                         </div>
