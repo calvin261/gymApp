@@ -161,7 +161,7 @@
 
                 var min = parseInt(minEl.value, 10);
                 var max = parseInt(maxEl.value, 10);
-                var age = parseFloat(data[2]) || 0; // use data for the age column
+                var age = parseFloat(data[3]) || 0; // use data for the age column
 
                 if (
                     (isNaN(min) && isNaN(max)) ||

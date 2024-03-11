@@ -13,9 +13,7 @@
         </select>
     </div>
     <div class=" mx-auto sm:px-6 lg:px-8 py-10">
-        <a href="{{ route('clients.create') }}">
-            <x-button class="bg-green-400 mb-5 hover:bg-green-600">Crear una nuevo client</x-button>
-        </a>
+       
         <x-table>
             @if ($clients->count())
                 <table aria-describedby="usuarios"
