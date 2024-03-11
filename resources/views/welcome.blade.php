@@ -89,15 +89,15 @@
                     <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
                         <div>
                             <h1 class="text-white font-semibold text-5xl">
-                                Feel The
+                                Siente El
                                 <span class="text-orange-500">
-                                    Power
+                                    Poder
                                 </span>
                             </h1>
                             <p class="mt-4 text-lg text-gray-300">
-                                Welcome to The GymSite. We are a fitness and training
-                                center that focuses on pushing you to your absolute limit.
-                                Download our complete brochure to get started today!
+                                Bienvenidos a GYMSITE. Somos un centro Fitness y de Entrenamiento
+                                enfocado en llevarte hasta tu mejor limite.
+                                Animate al cambio y empieza desde hoy!
                             </p>
                             <div class="flex space-x-5 justify-center w-60">
                                 <a href="{{ route('login') }}"
@@ -147,10 +147,9 @@
                                     class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
                                     <i class="fas fa-award"></i>
                                 </div>
-                                <h6 class="text-xl font-semibold">Personalized Timming</h6>
+                                <h6 class="text-xl font-semibold">Rutinas Personalizadas</h6>
                                 <p class="mt-2 mb-4 text-gray-600">
-                                    Divide details about your product or agency work into parts.
-                                    A paragraph describing a feature will be enough.
+                                    Encuentra rutinas que se adapten a ti.
                                 </p>
                             </div>
                         </div>
@@ -165,10 +164,10 @@
                                     class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400">
                                     <i class="fas fa-retweet"></i>
                                 </div>
-                                <h6 class="text-xl font-semibold">Free Starter Kit</h6>
+                                <h6 class="text-xl font-semibold">Planes</h6>
                                 <p class="mt-2 mb-4 text-gray-600">
-                                    Keep you user engaged by providing meaningful information.
-                                    Remember that by this time, the user is curious.
+                                    Contamos con planes al alcance de tu bolsillo.
+                                    Promociones increíbles, no te lo pierdas!!!
                                 </p>
                             </div>
                         </div>
@@ -183,10 +182,10 @@
                                     class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400">
                                     <i class="fas fa-fingerprint"></i>
                                 </div>
-                                <h6 class="text-xl font-semibold">Verified Gym</h6>
+                                <h6 class="text-xl font-semibold">Entrenadores</h6>
                                 <p class="mt-2 mb-4 text-gray-600">
-                                    Write a few lines about each one. A paragraph describing a
-                                    feature will be enough. Keep you user engaged!
+                                    Contamos con los mejores y mas preparados entrenadores.
+                                    Buscando darte la mejor experiencia.
                                 </p>
                             </div>
                         </div>
@@ -204,20 +203,18 @@
                             <i class="fas fa-user-friends text-xl"></i>
                         </div>
                         <h3 class="text-3xl mb-2 font-semibold leading-normal">
-                            Training with us is a pleasure
+                            Entrenar con nosotros es un placer.
                         </h3>
                         <p class="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
-                            Don't let your uses guess by attaching tooltips and popoves to
-                            any element. Just make sure you enable them first via
-                            JavaScript.
+                        Amamos a los apasionados del deporte, lo que nos hace querer darles el apoyo y la energía 
+                        necesaria para que en cada uno de sus entrenamientos potencien su poder al límite.
                         </p>
                         <p class="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
-                            The kit comes with three pre-built pages to help you get started
-                            faster. You can change the text and images and you're good to
-                            go. Just make sure you enable them first via JavaScript.
+                        Nuestra experiencia con grandes personas y profesionales, 
+                        nos ayudan a lograr lo mejor para nuestros clientes.
                         </p>
                         <a href="https://www.imridul.com"
-                            class="font-bold text-gray-800 mt-8">Download Brochure Now!</a>
+                            class="font-bold text-gray-800 mt-8">Tu decides cuando empezar!!!</a>
                     </div>
 
                     <!--  Customer image -->
@@ -238,12 +235,11 @@
                                         class="text-orange-500 fill-current"></polygon>
                                 </svg>
                                 <h4 class="text-xl font-bold text-white">
-                                    Top Gym Equipments
+                                    Mejores equipamentos de Gimnasio.
                                 </h4>
                                 <p class="text-md font-light mt-2 text-white">
-                                    The Arctic Ocean freezes every winter and much of the
-                                    sea-ice then thaws every summer, and that process will
-                                    continue whatever happens.
+                                    Nuestos equipos de la mejor calidad, te aseguran una experiencia,
+                                    genial y satisfactoria.
                                 </p>
                             </blockquote>
                         </div>
@@ -282,15 +278,15 @@
                         <div class="md:pr-12">
 
                             <small class="text-orange-500">
-                                About our gym
+                                Acerca de Nosotros
                             </small>
                             <h3 class="text-4xl uppercase font-bold">
-                                Safe Body Building
+                                Cambios Asegurados
                             </h3>
                             <p class="mt-4 text-lg leading-relaxed">
-                                The extension comes with three pre-built pages to help you get
-                                started faster. You can change the text and images and you're
-                                good to go.
+                                Con la ayuda de nuestro equipo y profesionales,
+                                te aseguramos no solo cambios físicos sino también
+                                en buenas prácticas para cuidar tu salud, !!!Porque nos importas!!!
                             </p>
                             <ul class="list-none mt-6">
                                 <li class="py-2">
@@ -302,7 +298,7 @@
                                         </div>
                                         <div>
                                             <h4 class="text-xl">
-                                                The latest & greatest gym equipment
+                                                Los últimos y mejores equipos de gimnasio.
                                             </h4>
                                         </div>
                                     </div>
@@ -316,7 +312,7 @@
                                         </div>
                                         <div>
                                             <h4 class="text-xl">
-                                                5-inch, quality foam floor padding
+                                                El mejor equipo de trabajo.
                                             </h4>
                                         </div>
                                     </div>
@@ -330,7 +326,7 @@
                                         </div>
                                         <div>
                                             <h4 class="text-xl">
-                                                3 professional trainers
+                                                Buen ambiente de entrenamiento.
                                             </h4>
                                         </div>
                                     </div>
@@ -347,11 +343,9 @@
             <div class="container mx-auto px-4">
                 <div class="flex flex-wrap justify-center text-center mb-24">
                     <div class="w-full lg:w-6/12 px-4">
-                        <h2 class="text-4xl font-semibold uppercase">Meet Our Trainers</h2>
+                        <h2 class="text-4xl font-semibold uppercase">CONOCE A NUESTROS ENTRENADORES</h2>
                         <p class="text-lg leading-relaxed m-4 ">
-                            According to the National Oceanic and Atmospheric
-                            Administration, Ted, Scambos, NSIDClead scentist, puts the
-                            potentially record maximum.
+                            Lo mejor de lo mejor, para nuestros clientes que son lo mejor de lo mejor.
                         </p>
                     </div>
                 </div>
@@ -369,7 +363,7 @@
                             <div class="pt-6 text-center">
                                 <h5 class="text-xl font-bold">Ronald McDonald</h5>
                                 <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                                    Double Whoopass With Cheese
+                                    Trabajando para un mejor tú
                                 </p>
                                 <div class="mt-6">
 
@@ -405,7 +399,7 @@
                             <div class="pt-6 text-center">
                                 <h5 class="text-xl font-bold">Strawberry Shortcake</h5>
                                 <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                                    Cupcake Smasher
+                                    Fuerte en cuerpo y alma
                                 </p>
                                 <div class="mt-6">
 
@@ -440,7 +434,7 @@
                             <div class="pt-6 text-center">
                                 <h5 class="text-xl font-bold ">Nicholas Rogers</h5>
                                 <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                                    Neighborhood Watchman
+                                    Deja ya tus antiguos hábitos
                                 </p>
                                 <div class="mt-6">
                                     <button
@@ -485,10 +479,9 @@
                 <div class="flex flex-wrap text-center justify-center"
                     data-aos="fade-down">
                     <div class="w-full lg:w-6/12 px-4">
-                        <h2 class="text-4xl font-semibold text-white">Contact Us</h2>
+                        <h2 class="text-4xl font-semibold text-white">Contactanos</h2>
                         <p class="text-lg leading-relaxed mt-4 mb-4 text-gray-500">
-                            Contact us to ask any questions, aquire a membership, talk to
-                            our trainers or anything else
+                        Realiza tus preguntas, que para nosotros es importante saber tus necesidades.
                         </p>
                     </div>
                 </div>
@@ -501,11 +494,10 @@
                             <i class="fas fa-medal text-xl"></i>
                         </div>
                         <h6 class="text-xl mt-5 font-semibold text-white">
-                            Excelent Services
+                            Servicios Excelentes
                         </h6>
                         <p class="mt-2 mb-4 text-gray-500">
-                            Contact us to ask any questions, aquire a membership, talk to
-                            our trainers or anything else
+                            Cualquier duda acerca de nosotros sera una prioridad
                         </p>
                     </div>
                     <!-- Service 2 -->
@@ -515,11 +507,10 @@
                             <i class="fas fa-poll text-xl"></i>
                         </div>
                         <h5 class="text-xl mt-5 font-semibold text-white">
-                            Grow your Body
+                            Mejora tu cuerpo
                         </h5>
                         <p class="mt-2 mb-4 text-gray-500">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
+                            Como lograr cambios físicos significativos
                         </p>
                     </div>
                     <!-- Service 3 -->
@@ -528,10 +519,9 @@
                             class="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
                             <i class="fas fa-lightbulb text-xl"></i>
                         </div>
-                        <h5 class="text-xl mt-5 font-semibold text-white">Launch time</h5>
+                        <h5 class="text-xl mt-5 font-semibold text-white">Optimización de Tiempo</h5>
                         <p class="mt-2 mb-4 text-gray-500">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
+                            Porque para nosotros tu tiempo es importante
                         </p>
                     </div>
                 </div>
@@ -560,9 +550,9 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap">
                 <div class="w-full lg:w-6/12 px-4 mb-12">
-                    <h4 class="text-3xl font-semibold">Follow us on social media</h4>
+                    <h4 class="text-3xl font-semibold">Siguenos en Redes Sociales</h4>
                     <h5 class="text-lg mt-0 mb-2 text-gray-700">
-                        Find us on any of these platforms, we respond 1-2 business days.
+                        Encuentranos en todas nuestras plataformas.
                     </h5>
                     <div class="mt-6">
 
@@ -586,12 +576,13 @@
                 <div class="w-full lg:w-6/12 px-4">
                     <div class="flex flex-wrap items-top mb-6">
                         <div class="w-full lg:w-4/12 px-4 ml-auto">
-                            <span class="block uppercase text-orange-500 text-sm font-semibold mb-2">Useful
-                                Links</span>
+                            <span class="block uppercase text-orange-500 text-sm font-semibold mb-2">Links Relacionados
+                    
+                            </span>
                             <ul class="list-unstyled">
                                 <li>
                                     <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                                        href="#">About Us</a>
+                                        href="#">Acerca de Nosotros</a>
                                 </li>
                                 <li>
                                     <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
@@ -603,29 +594,29 @@
                                 </li>
                                 <li>
                                     <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                                        href="#">Free Products</a>
+                                        href="#">Productoss</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="w-full lg:w-4/12 px-4">
-                            <span class="block uppercase text-orange-500 text-sm font-semibold mb-2">Other
-                                Resources</span>
+                            <span class="block uppercase text-orange-500 text-sm font-semibold mb-2">Otros
+                                Recursos</span>
                             <ul class="list-unstyled">
                                 <li>
                                     <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                                        href="#">Online Training</a>
+                                        href="#">Entrenamientos</a>
                                 </li>
                                 <li>
                                     <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                                        href="#">Terms &amp; Conditions</a>
+                                        href="#">Terminos &amp; Condiciones</a>
                                 </li>
                                 <li>
                                     <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                                        href="#">Privacy Policy</a>
+                                        href="#">Politica de Privacidad</a>
                                 </li>
                                 <li>
                                     <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                                        href="#">Contact Us</a>
+                                        href="#">Contactanos</a>
                                 </li>
                             </ul>
                         </div>
@@ -638,7 +629,7 @@
                     <div class="text-sm text-gray-600 font-semibold py-1">
                         Copyright © <span id="year"></span> Gymsite
                         <a href="#"
-                            class="text-gray-600 hover:text-gray-900">Mridul</a>.
+                            class="text-gray-600 hover:text-gray-900">Fitness</a>.
                     </div>
                 </div>
             </div>
