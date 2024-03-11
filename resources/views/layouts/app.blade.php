@@ -23,6 +23,7 @@
     <link href="https://cdn.datatables.net/2.0.1/css/dataTables.tailwindcss.css"
         rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
 
 </head>
@@ -56,6 +57,8 @@
         type="text/javascript"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.min.js"
         type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
 
     @livewireScripts
 </body>
